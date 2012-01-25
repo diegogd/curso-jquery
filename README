@@ -1,0 +1,21 @@
+La primera versión establece el punto de partida:
+
+El proyecto consistirá en lo siguiente:
+- Una página con un listado de fotografías
+- Al hacer clic sobre cada fotografía se mostrará en tamaño grande
+- Se mostrará además un listado de comentarios
+- Permitirá añadir un nuevo comentario y puntuación
+- Se mostrará un listado de personas etiquetadas en las fotografías
+- Se permitirá identificar a una nueva persona
+
+El proyecto parte de una página html con las fotografías cargadas, se irá 
+modificando la aplicación según se introducen nuevos conceptos.
+
+Para agilizar el desarrollo se utiliza de base:
+ - HTML5Boilerplate como plantilla de la página web, que incluye:
+    - Jquery
+    - console.log (por si no se cuenta con firebug o chrome)
+    - bloque google analytics
+    - chrome framework for IE6
+
+ - Bootstrap como plantilla base de css.
