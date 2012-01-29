@@ -1,4 +1,14 @@
 
+Tercera etapa:
+
+- Se amplia la funcionalidad de fancybox.
+    - Hacemos uso del sistema de eventos para no tener que reescribir todo.
+- Se añade la llamada a un servicio jsonp (cross-domain).
+- Se añade un sistema de plantillas para mostrar los comentarios.
+
+
+================================================================
+
 En la segunda parte se incluye lo siguiente:
 
 - Comentar la ubicación de los bloques de código.

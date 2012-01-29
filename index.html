@@ -16,6 +16,7 @@
         <link href="css/bootstrap.css" rel="stylesheet">
         
         <link rel="stylesheet" href="css/jquery.fancybox.css">
+        <link rel="stylesheet" href="css/jquery.jscrollpane.css">
 	<link rel="stylesheet" href="css/style.css">
         <link rel="stylesheet" href="css/album.css">
         <style type="text/css">
@@ -60,12 +61,37 @@
         </footer>
     </div> <!-- /container -->
 
+    <script id="comment-block" type="text/x-jquery-tmpl">
+        <div class="comment">
+            {{if _content}}
+            <div class="icon">
+                {{if iconfarm}}
+                <img src="http://farm${iconfarm}.static.flickr.com/${iconserver}/buddyicons/${author}.jpg" />
+                {{else}}
+                <img src="http://www.flickr.com/images/buddyicon.jpg" />
+                {{/if}}
+            </div>
+            <div class="author">
+                ${authorname}
+            </div>
+            <div class="message">
+                {{html _content}}
+            </div>
+            {{else}}
+            Sin comentarios
+            {{/if}}
+        </div>
+    </script>
 
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
 <script>window.jQuery || document.write('<script src="js/libs/jquery-1.7.1.min.js"><\/script>')</script>
 
 <!-- scripts concatenated and minified via ant build script-->
+<script src="js/jquery.tmpl.min.js"></script>
 <script src="js/jquery.fancybox.pack.js"></script>
+<script src="js/jquery.mousewheel.js"></script>
+<script src="js/mwheelIntent.js"></script>
+<script src="js/jquery.jscrollpane.min.js"></script>
 <script src="js/plugins.js"></script>
 <script src="js/script.js"></script>
 <!-- end scripts-->
@@ -82,7 +108,6 @@
             var pictures = $(".pictures");
             for(i in data.photos.photo){
                 var photo = data.photos.photo[i];
-                console.log(photo);
                 
                 var base_url = "http://farm" + photo.farm + ".staticflickr.com/" + photo.server + "/" + photo.id + "_" + photo.secret + "_";
                 var small_url = base_url + "s.jpg";
@@ -98,7 +123,32 @@
                 .appendTo(pictures);
             }
             
-            $('.fancybox').fancybox();
+            $('.fancybox').fancybox({
+                margin: 60,
+                prevEffect	: 'none',
+		nextEffect	: 'none',
+		beforeShow      : function(){
+                    var photo_id = /([\d]+)_/.exec(this.href)[1];
+                    
+                    $('#comments').remove();
+                    var _self = $('<div></div>')
+                    .attr('id', 'comments')
+                    .addClass('comments_box')
+                    .appendTo($('body')).show();
+                    
+                    $.getJSON("http://api.flickr.com/services/rest/?method=flickr.photos.comments.getList&api_key=c6562bb72d064ad881061b729b17483d&format=json&jsoncallback=?",
+                        { "photo_id" : photo_id }, 
+                        function(data){
+                            var comments = data.comments.comment;
+                            $("#comment-block").tmpl(comments).appendTo(_self);
+                            
+                            _self.jScrollPane();
+                        });
+                },
+                beforeClose      : function(){
+                    $('#comments').fadeOut().remove();
+                }
+            });
         });
     });
 </script>
