@@ -1,4 +1,14 @@
 
+Cuarta etapa:
+
+- Puesto que el código javascript se reutiliza con cada recarga de página,
+sería desaeable que fuese cacheado -> ayuda a la limpieza de código.
+- Creamos componente jquery ui con la funcionalidad que hemos implementado 
+hasta ahora.
+
+
+================================================================
+
 Tercera etapa:
 
 - Se amplia la funcionalidad de fancybox.
