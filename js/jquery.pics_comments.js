@@ -34,8 +34,7 @@
             $(window).bind("resize", function(){ _self.resizeCommentsWindow(); }); 
             
         },
-        createCommentsWindow: function(photo_id){
-            
+        createCommentsWindow: function(photo_id){            
             var _self = this,  
             o = _self.options,  
             v = _self.variables;
@@ -45,10 +44,8 @@
                 .attr('id', 'comments')
                 .addClass('comments_box');
                 v.comments_window.appendTo($('body'));
-                
             }
             v.comments_window.show();
-            
             
             _self.resizeCommentsWindow();
 
@@ -56,17 +53,16 @@
                 "http://api.flickr.com/services/rest/?method=flickr.photos.comments.getList&format=json&jsoncallback=?",
                 {"api_key" : o.flickr_api_key, "photo_id" : photo_id}, 
                 function(data){
-                    if( v.jscroll_api ){
-                        v.jscroll_api.destroy();
-                        v.jscroll_api = null;
-                        v.comments_window.attr('style','');
-                        _self.resizeCommentsWindow();
-                    }                    
-                    v.comments_window.children().remove();
+                    if( !v.jscroll_api ){
+                       v.jscroll_api = v.comments_window.jScrollPane().data('jsp');
+                    }
+                    var container = v.jscroll_api.getContentPane();
+                    
+                    container.children().remove();
                     var comments = data.comments.comment;
-                    $("#comment-block").tmpl(comments).appendTo(v.comments_window);
-
-                    v.jscroll_api = v.comments_window.jScrollPane().data.jsp;
+                    $("#comment-block").tmpl(comments).appendTo(container);
+                    
+                    v.jscroll_api.reinitialise();
                 }
             );
         },
