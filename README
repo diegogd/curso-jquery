@@ -1,4 +1,14 @@
 
+Quinta etapa:
+
+- Añadir feedback de llamadas ajax
+- Control de errores
+    - Tratamiento atómico de peticiones ajax
+    - Tratamiento global de peticiones ajax
+    - Control de conexiones activas para evitar la salida de la web.
+
+================================================================
+
 Cuarta etapa:
 
 - Puesto que el código javascript se reutiliza con cada recarga de página,

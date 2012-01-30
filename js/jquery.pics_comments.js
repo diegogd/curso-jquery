@@ -16,8 +16,6 @@
             v = _self.variables,
             el = _self.element;
             
-            console.log("CREATED");
-            
             el.find(o.selector).fancybox({
                 margin: 60,
                 prevEffect	: 'none',
@@ -49,10 +47,11 @@
             
             _self.resizeCommentsWindow();
 
-            $.getJSON(
-                "http://api.flickr.com/services/rest/?method=flickr.photos.comments.getList&format=json&jsoncallback=?",
-                {"api_key" : o.flickr_api_key, "photo_id" : photo_id}, 
-                function(data){
+            $.ajax({
+                url: "http://api.flickr.com/services/rest/?method=flickr.photos.comments.getList&format=json&jsoncallback=?",
+                data: {"api_key" : o.flickr_api_key, "photo_id" : photo_id}, 
+                dataType: 'jsonp',
+                success: function(data){
                     if( !v.jscroll_api ){
                        v.jscroll_api = v.comments_window.jScrollPane().data('jsp');
                     }
@@ -63,8 +62,9 @@
                     $("#comment-block").tmpl(comments).appendTo(container);
                     
                     v.jscroll_api.reinitialise();
-                }
-            );
+                },
+                error: function(){ }
+            });
         },
         resizeCommentsWindow: function(){
             var _self = this,  
@@ -74,8 +74,6 @@
                 var wh = $(window).height();
                 
                 var vtop = v.comments_window.position().top - $(document).scrollTop();
-                console.log('wh: '+wh+', top: '+vtop);
-                // console.log((wh - v.comments_window.position().top - 30));
                 v.comments_window.css({ 
                     'height' : (wh - vtop - 30) + 'px'
                 });

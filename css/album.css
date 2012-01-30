@@ -96,3 +96,18 @@ border: 0;
     font-size: 0.9em;
 }
 
+.ajax_notify { 
+    position: fixed;
+    padding: 4px 10px;
+    background-color: #fff;
+    bottom: 0;
+    right: 50%;
+    margin-right: -40px;
+    border-radius: 10px 10px 0 0;
+    font-size: 1.2em;
+    opacity: 0.65;
+    display: none;
+    z-index: 1005;
+}
+
+.ajax_notify.loading { display: block; }
