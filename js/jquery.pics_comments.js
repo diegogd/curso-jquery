@@ -16,15 +16,24 @@
             v = _self.variables,
             el = _self.element;
             
+            var tag = null;
+            
             el.find(o.selector).fancybox({
                 margin: 60,
                 prevEffect	: 'none',
 		nextEffect	: 'none',
+                beforeLoad      : function(){
+                    if( tag ) tag.pic_tagging('destroy');
+                },
 		beforeShow      : function(){
                     var photo_id = /([\d]+)_/.exec(this.href)[1];
                     _self.createCommentsWindow(photo_id);
                 },
-                beforeClose      : function(){
+                afterShow       : function(){
+                    var photo_id = /([\d]+)_/.exec(this.href)[1];
+                    tag = $('.fancybox-inner').pic_tagging({picture_id: photo_id});
+                },                    
+                beforeClose     : function(){
                     _self.destroyCommentsWindow();
                 }
             });

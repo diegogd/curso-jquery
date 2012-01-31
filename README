@@ -1,3 +1,16 @@
+Sexta etapa:
+
+- Construcción de plugin jquery para etiquetar fotografías.
+    - Asociar el plugin a cada foto
+    - Cargar etiquetas existentes
+    - Añadir nuevas etiquetas al hacer clic sobre la foto.
+    - Almacenamiento remoto con openkeyval.org
+
+- Referencias de interés:
+    - http://net.tutsplus.com/tutorials/javascript-ajax/coding-your-first-jquery-ui-plugin/
+
+
+================================================================
 
 Quinta etapa:
 

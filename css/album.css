@@ -111,3 +111,7 @@ border: 0;
 }
 
 .ajax_notify.loading { display: block; }
+
+.picture_tag { position: absolute; border: 1px dotted #999; opacity: 0.3; z-index: 10000;}
+.picture_tag:hover { opacity: 1; -webkit-box-shadow: rgba(0, 0, 0, 0.496094) 0px 10px 25px; box-shadow: rgba(0, 0, 0, 0.496094) 0px 10px 25px;}
+.picture_tag .message { position: absolute; top: -15px; left: 0; color: #fff; }
