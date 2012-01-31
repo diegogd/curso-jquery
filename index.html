@@ -130,11 +130,19 @@
         });
     });
     
+    // Manejadores globales de las peticiones AJAX
     $.ajaxSetup({ cache: false });
     $('#ajax_progress').ajaxStart(function(){ console.log('start'); $(this).show(); })
     $('#ajax_progress').ajaxStop(function(){ $(this).hide(); console.log('finish'); });
     $('#ajax_progress').ajaxError(function(){ console.log('error'); });
     
+    // Control de conexiones activas - Evitar que salga de la página si hay
+    // peticiones ajax pendientes.
+    window.onbeforeunload = function() { 
+      if ($.active) {
+        return "Tiene peticiones con en servidor en curso, si abandona esta página puede perder información. Espere a que se complete todas las peticiones.";
+      }
+    }
     
 </script>
 
